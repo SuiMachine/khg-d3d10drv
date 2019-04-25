@@ -1,0 +1,79 @@
+﻿  d3d10drv.cpp
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnObjBas.h(428): warning C4297: 'UObject::operator delete': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnObjBas.h(428): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55460): note: see previous definition of 'DXGI_STATUS_OCCLUDED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55469): note: see previous definition of 'DXGI_STATUS_CLIPPED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55478): note: see previous definition of 'DXGI_STATUS_NO_REDIRECTION'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55487): note: see previous definition of 'DXGI_STATUS_NO_DESKTOP_ACCESS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55496): note: see previous definition of 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55505): note: see previous definition of 'DXGI_STATUS_MODE_CHANGED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55514): note: see previous definition of 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55529): note: see previous definition of 'DXGI_ERROR_INVALID_CALL'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55538): note: see previous definition of 'DXGI_ERROR_NOT_FOUND'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55547): note: see previous definition of 'DXGI_ERROR_MORE_DATA'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55556): note: see previous definition of 'DXGI_ERROR_UNSUPPORTED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55565): note: see previous definition of 'DXGI_ERROR_DEVICE_REMOVED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55574): note: see previous definition of 'DXGI_ERROR_DEVICE_HUNG'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55584): note: see previous definition of 'DXGI_ERROR_DEVICE_RESET'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55593): note: see previous definition of 'DXGI_ERROR_WAS_STILL_DRAWING'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55603): note: see previous definition of 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55612): note: see previous definition of 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55622): note: see previous definition of 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55631): note: see previous definition of 'DXGI_ERROR_NONEXCLUSIVE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55640): note: see previous definition of 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55650): note: see previous definition of 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55659): note: see previous definition of 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\D3D10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55899): note: see previous definition of 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\D3D10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': macro redefinition
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\winerror.h(55908): note: see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
+D:\Projekty\khg-d3d10drv\d3d10drv\d3d.h(39): warning C4091: 'static ': ignored on left of 'D3D::Options' when no variable is declared
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): warning C4297: 'TLazyArray<INT>::~TLazyArray': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(776): note: while compiling class template member function 'TLazyArray<INT>::~TLazyArray(void)'
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(213): note: see reference to function template instantiation 'TLazyArray<INT>::~TLazyArray(void)' being compiled
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(222): note: see reference to class template instantiation 'TLazyArray<INT>' being compiled
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): warning C4297: 'TLazyArray<FMeshVertConnect>::~TLazyArray': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(776): note: while compiling class template member function 'TLazyArray<FMeshVertConnect>::~TLazyArray(void)'
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(213): note: see reference to function template instantiation 'TLazyArray<FMeshVertConnect>::~TLazyArray(void)' being compiled
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(219): note: see reference to class template instantiation 'TLazyArray<FMeshVertConnect>' being compiled
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): warning C4297: 'TLazyArray<FMeshTri>::~TLazyArray': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(776): note: while compiling class template member function 'TLazyArray<FMeshTri>::~TLazyArray(void)'
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(213): note: see reference to function template instantiation 'TLazyArray<FMeshTri>::~TLazyArray(void)' being compiled
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(217): note: see reference to class template instantiation 'TLazyArray<FMeshTri>' being compiled
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): warning C4297: 'TLazyArray<FMeshVert>::~TLazyArray': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(776): note: while compiling class template member function 'TLazyArray<FMeshVert>::~TLazyArray(void)'
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(213): note: see reference to function template instantiation 'TLazyArray<FMeshVert>::~TLazyArray(void)' being compiled
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnMesh.h(216): note: see reference to class template instantiation 'TLazyArray<FMeshVert>' being compiled
+D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): warning C4297: 'TLazyArray<BYTE>::~TLazyArray': function assumed not to throw an exception but does
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(780): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+  D:\Projekty\khg-d3d10drv\Games\KHG\Core\Inc\UnTemplate.h(776): note: while compiling class template member function 'TLazyArray<BYTE>::~TLazyArray(void)'
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnTex.h(175): note: see reference to function template instantiation 'TLazyArray<BYTE>::~TLazyArray(void)' being compiled
+  D:\Projekty\khg-d3d10drv\Games\KHG\Engine\Inc\UnTex.h(174): note: see reference to class template instantiation 'TLazyArray<BYTE>' being compiled
+D:\Projekty\khg-d3d10drv\d3d10drv\d3d10drv.cpp(250): warning C4700: uninitialized local variable 'brightness' used
+  d3d10drv.vcxproj -> D:\microprose\khg\System\d3d10drv.dll

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="KHG Debug|Win32">
+      <Configuration>KHG Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}</ProjectGuid>
+    <RootNamespace>d3d10drv</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='KHG Debug|Win32'">
+    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='KHG Debug|Win32'">
+    <OutDir>D:\microprose\khg\System\</OutDir>
+    <TargetName>d3d10drv</TargetName>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\Games\KHG\Core\Inc;..\Games\KHG\Engine\Inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;..\Games\KHG\Engine\Lib;..\Games\KHG\Core\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='KHG Debug|Win32'">
+    <Link>
+      <AdditionalDependencies>d3d10.lib;d3dx10.lib;Core.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile>
+      <PreprocessorDefinitions>D3D10DRV_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="d3d.cpp" />
+    <ClCompile Include="d3d10drv.cpp" />
+    <ClCompile Include="dynamicgeometrybuffer.cpp" />
+    <ClCompile Include="geometrybuffer.cpp" />
+    <ClCompile Include="misc.cpp" />
+    <ClCompile Include="Shader_Dummy.cpp" />
+    <ClCompile Include="texconverter.cpp" />
+    <ClCompile Include="texturecache.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Shader_ComplexSurface.cpp" />
+    <ClCompile Include="Shader_FinalPass.cpp" />
+    <ClCompile Include="Shader_FirstPass.cpp" />
+    <ClCompile Include="Shader_FogSurface.cpp" />
+    <ClCompile Include="Shader_GouraudPolygon.cpp" />
+    <ClCompile Include="Shader_HDR.cpp" />
+    <ClCompile Include="Shader_Postprocess.cpp" />
+    <ClCompile Include="Shader_Tile.cpp" />
+    <ClCompile Include="Shader_Unreal.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="customflags.h" />
+    <ClInclude Include="d3d.h" />
+    <ClInclude Include="d3d10drv.h" />
+    <ClInclude Include="dynamicgeometrybuffer.h" />
+    <ClInclude Include="geometrybuffer.h" />
+    <ClInclude Include="misc.h" />
+    <ClInclude Include="polyflags.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Shader_Dummy.h" />
+    <ClInclude Include="texconverter.h" />
+    <ClInclude Include="texturecache.h" />
+    <ClInclude Include="VertexFormats.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Shader_ComplexSurface.h" />
+    <ClInclude Include="Shader_FinalPass.h" />
+    <ClInclude Include="Shader_FirstPass.h" />
+    <ClInclude Include="Shader_FogSurface.h" />
+    <ClInclude Include="Shader_GouraudPolygon.h" />
+    <ClInclude Include="Shader_HDR.h" />
+    <ClInclude Include="Shader_Postprocess.h" />
+    <ClInclude Include="Shader_Tile.h" />
+    <ClInclude Include="Shader_Unreal.h" />
+    <ClInclude Include="doxymain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="common.fxh" />
+    <None Include="complexsurface.fx" />
+    <None Include="cpp.hint" />
+    <None Include="finalpass.fx" />
+    <None Include="firstpass.fx" />
+    <None Include="fogsurface.fx" />
+    <None Include="gouraudpolygon.fx" />
+    <None Include="hdr.fx" />
+    <None Include="polyflags.fxh" />
+    <None Include="postprocessing.fxh" />
+    <None Include="states.fxh" />
+    <None Include="tile.fx" />
+    <None Include="unreal_pom.fx" />
+    <None Include="unrealpool.fxh" />
+    <None Include="D3D10Drv.int" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,10 @@
+
+These are Headers / Libs for Star Trek: Klingon Honor Guard, to enabled native coding for this Game.
+They headers are based on the unrealpubsrc224v. The Libs were created with dumpbin / lib.
+
+Note:
+This is an very early version and probably still contains a lot of issues.
+
+03/2015 by Sebastian Kaufel
+
+Visit http://coding.hanfling.de/launch/

@@ -1,0 +1,5 @@
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define DECLARE_CLASS(TClass, TSuperClass, TStaticFlags) DECLARE_BASE_CLASS( TClass, TSuperClass, TStaticFlags ) friend FArchive &operator<<( FArchive& Ar, TClass*& Res ) { return Ar << *(UObject**)&Res; } virtual ~TClass() { ConditionalDestroy(); } static void InternalConstructor( void* X ) { new( (EInternal*)X )TClass(); }
+#define DECLARE_CLASS(TClass, TSuperClass, TStaticFlags) DECLARE_BASE_CLASS( TClass, TSuperClass, TStaticFlags ) friend FArchive &operator<<( FArchive& Ar, TClass*& Res ) { return Ar << *(UObject**)&Res; } virtual ~TClass() { ConditionalDestroy(); } static void InternalConstructor( void* X ) { new( (EInternal*)X )TClass(); }
