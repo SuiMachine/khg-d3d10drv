@@ -44,8 +44,6 @@ Finally, each override texture can have custom polyflags in a file, these are lo
 #include "polyflags.h"
 #include <fstream>
 
-#define PYR(n) ((n)*((n+1))/2)		/* Pyramid scaling function */
-
 
 /**
 Mappings from Unreal to our texture info
@@ -359,22 +357,9 @@ void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *
 	BYTE *source = (BYTE*) Info.Mips[mipLevel]->DataPtr;
 	BYTE *sourceEnd = source + Info.Mips[mipLevel]->USize*Info.Mips[mipLevel]->VSize;
 
-	// Setup scaling.
-	BYTE ScaleR = PYR(Info.MaxColor->R);
-	BYTE ScaleG = PYR(Info.MaxColor->G);
-	BYTE ScaleB = PYR(Info.MaxColor->B);
-
-	FColor LocalPal[256], * NewPal = Info.Palette, TempColor(0, 0, 0, 0);
-	TempColor = Info.Palette[0];
-	NewPal = LocalPal;
-
-
 	while(source<sourceEnd)
 	{
 		*dest=*(DWORD*)&(Info.Palette[*source]);
-
-
-
 
 
 		source++;
