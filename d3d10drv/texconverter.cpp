@@ -42,6 +42,10 @@ Finally, each override texture can have custom polyflags in a file, these are lo
 #include <D3dx10.h>
 #include "TexConverter.h"
 #include "polyflags.h"
+#include <fstream>
+
+#define PYR(n) ((n)*((n+1))/2)		/* Pyramid scaling function */
+
 
 /**
 Mappings from Unreal to our texture info
@@ -80,6 +84,7 @@ Load a texture from file instead of the one passed by the game.
 */
 bool TexConverter::loadOverride(const FTextureInfo& Info,DWORD PolyFlags) const
 {
+	auto pallet = Info.Format;
 	return false;
 	/*const char* texName = Info.Texture->GetFullName();
 	
@@ -171,6 +176,7 @@ Fill texture info structure and execute proper conversion of pixel data.
 \param Info Unreal texture information, includes cache id, size information, texture data.
 \param PolyFlags Polyflags, see polyflags.h.
 */
+
 void TexConverter::convertAndCache(FTextureInfo& Info,DWORD PolyFlags) const
 {
 
@@ -265,13 +271,12 @@ void TexConverter::convertAndCache(FTextureInfo& Info,DWORD PolyFlags) const
 
 	textureCache->cacheTexture(Info.CacheID,metadata,texture);
 
-
-/*	if( wcswcs(Info.Texture->GetFullName(),L"seal")  )
+	if( desc.Width > 128 && desc.Height > 128 && false )
 	{
 		char buf[256];
-		sprintf(buf,"d:\\%d.dds",Info.CacheID);
+		sprintf(buf,"e:\\wat\\%d.dds",Info.CacheID);
 		D3DX10SaveTextureToFileA(texture,D3DX10_IFF_DDS,buf);
-	}*/
+	}
 
 	//Delete temporary data
 	if(!format.directAssign)
@@ -344,9 +349,8 @@ Convert from palleted 8bpp to r8g8b8a8.
 */
 void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *target,int mipLevel)
 {
-
 	//If texture is masked with palette index 0 = transparent; make that index black w. alpha 0 (black looks best for the border that gets left after masking)
-	if(PolyFlags & PF_Masked)
+	if(PolyFlags & PF_Masked )
 	{
 		*(DWORD*)(&(Info.Palette->R)) = (DWORD) 0;
 	}
@@ -354,13 +358,28 @@ void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *
 	DWORD *dest = (DWORD*) target;
 	BYTE *source = (BYTE*) Info.Mips[mipLevel]->DataPtr;
 	BYTE *sourceEnd = source + Info.Mips[mipLevel]->USize*Info.Mips[mipLevel]->VSize;
+
+	// Setup scaling.
+	BYTE ScaleR = PYR(Info.MaxColor->R);
+	BYTE ScaleG = PYR(Info.MaxColor->G);
+	BYTE ScaleB = PYR(Info.MaxColor->B);
+
+	FColor LocalPal[256], * NewPal = Info.Palette, TempColor(0, 0, 0, 0);
+	TempColor = Info.Palette[0];
+	NewPal = LocalPal;
+
+
 	while(source<sourceEnd)
 	{
 		*dest=*(DWORD*)&(Info.Palette[*source]);
+
+
+
+
+
 		source++;
 		dest++;
 	}
-
 }
 
 /**
