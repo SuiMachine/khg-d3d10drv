@@ -36,7 +36,6 @@ private:
 	
 public:
 	TexConverter(TextureCache *textureCache);
-	bool loadOverride(const FTextureInfo& Info, DWORD PolyFlags) const;
 	void convertAndCache(FTextureInfo& Info, DWORD PolyFlags) const;
 	void update(FTextureInfo& Info,DWORD PolyFlags) const;
 

@@ -68,16 +68,6 @@ public:
 	void SetSceneNode( FSceneNode* Frame );
 	void PrecacheTexture( FTextureInfo& Info, DWORD PolyFlags );
 	void EndFlash();
-	void StaticConstructor();
 	static void StaticConstructor(UClass* Class);
 	//@}
-
-	#if (RUNE)
-	/**@name Rune fog*/
-	//@{
-	void DrawFogSurface(FSceneNode* Frame, FFogSurf &FogSurf);
-	void PreDrawGouraud(FSceneNode *Frame, FLOAT FogDistance, FPlane FogColor);
-	void PostDrawGouraud(FLOAT FogDistance);
-	//@}
-	#endif
 };

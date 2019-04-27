@@ -556,7 +556,7 @@ TCHAR *D3D::getModes()
 	D3DObjects.output->GetDisplayModeList(BACKBUFFER_FORMAT, 0, &num, descs);
 	
 	//Add each mode once (disregard refresh rates etc)
-	#if( DEUSEX || UNREAL || UNREALGOLD)
+	#if( DEUSEX || UNREAL || UNREALGOLD || TRUE)
 	const int maxItems = 16;
 	int h[maxItems];
 	int w[maxItems];
@@ -578,8 +578,8 @@ TCHAR *D3D::getModes()
 	for(int i=slot+1;i<maxItems;i++)	
 	{
 		TCHAR curr[resStringLength+1];
-		swprintf_s(curr,resStringLength+1,L"%dx%d ",w[i],h[i]);
-		wcscat_s(out,num*resStringLength+1,curr);	
+		printf_s(curr,resStringLength+1,L"%dx%d ",w[i],h[i]);
+		strcat_s(out,num*resStringLength+1,curr);	
 	}
 	#else
 	int height = 0;

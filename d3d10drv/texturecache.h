@@ -77,7 +77,7 @@ public:
 	ID3D10Texture2D *createTexture(const D3D10_TEXTURE2D_DESC &desc, const D3D10_SUBRESOURCE_DATA &data) const;
 	void updateMip(const FTextureInfo& Info,int mipNum, const D3D10_SUBRESOURCE_DATA &data) const;
 	bool loadFileTexture(char* fileName, ID3D10Texture2D **tex, D3DX10_IMAGE_LOAD_INFO *loadInfo) const;
-	void cacheTexture(DWORD64 id,const TextureMetaData &metadata, ID3D10Texture2D *tex,int extraIndex=-1);
+	void cacheTexture(unsigned __int64 id,const TextureMetaData &metadata, ID3D10Texture2D *tex,int extraIndex=-1);
 	bool textureIsCached(DWORD64 id) const;	
 	const TextureMetaData &getTextureMetaData(DWORD64 id) const;
 	const TextureMetaData *setTexture(const Shader_Unreal* shader, TexturePass pass,DWORD64 id,int extraIndex=-1);

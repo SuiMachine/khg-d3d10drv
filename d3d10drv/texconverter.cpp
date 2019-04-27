@@ -43,8 +43,6 @@ Finally, each override texture can have custom polyflags in a file, these are lo
 #include "TexConverter.h"
 #include "polyflags.h"
 #include <fstream>
-#define PYR(n) ((n)*((n+1))/2)		/* Pyramid scaling function */
-BYTE ScaleByteNormal[PYR(256)];	/* Regular normalization table */
 
 /**
 Mappings from Unreal to our texture info
@@ -76,93 +74,6 @@ TextureCache::TextureMetaData TexConverter::buildMetaData(const FTextureInfo &In
 	return metadata;
 }
 
-/**
-Load a texture from file instead of the one passed by the game.
-
-\return True if an override file was present
-*/
-bool TexConverter::loadOverride(const FTextureInfo& Info,DWORD PolyFlags) const
-{
-	return false;
-	/*const char* texName = Info.Texture->GetFullName();
-	
-	if(wcswcs(texName,L"Texture ")!=texName) //name must start with Texture, don't override lightmaps etc.
-		return false;
-
-	char overrideFile[TextureCache::DUMMY_NUM_EXTERNAL_TEXTURES+1][MAX_PATH];
-	
-	wcscpy_s(overrideFile[0],MAX_PATH,L"..\\textures\\");
-	wcscat_s(overrideFile[0],MAX_PATH,texName+8); //+8 to skip "Texture "
-	
-	//Replace '.' with '\\'
-	char* loc;
-	while(loc=wcschr(overrideFile[0]+2,'.'))
-	{
-		*loc='\\';
-	}
-
-	
-	//Build filenames of extra textures
-	for(int i=0;i<TextureCache::DUMMY_NUM_EXTERNAL_TEXTURES;i++)
-	{
-		wcscpy_s(overrideFile[i+1],MAX_PATH,overrideFile[0]);
-		wcscat_s(overrideFile[1+i],MAX_PATH,TextureCache::externalTextures[i].suffix);
-	}
-
-	for(int i=0;i<TextureCache::DUMMY_NUM_EXTERNAL_TEXTURES+1;i++)
-		wcscat_s(overrideFile[i],MAX_PATH,L".dds");
-
-	//Load texture
-	ID3D10Texture2D* texture=nullptr;
-	D3DX10_IMAGE_LOAD_INFO loadInfo;
-	loadInfo.Width = D3DX10_DEFAULT;
-	loadInfo.Height = D3DX10_DEFAULT;
-	loadInfo.Depth = D3DX10_DEFAULT;
-	loadInfo.Filter = D3DX10_DEFAULT;
-	loadInfo.MipFilter = D3DX10_DEFAULT;
-	loadInfo.FirstMipLevel = D3DX10_DEFAULT;
-	loadInfo.Format = (DXGI_FORMAT) D3DX10_DEFAULT;
-	loadInfo.MipLevels = D3DX10_DEFAULT;
-	loadInfo.MiscFlags = D3DX10_DEFAULT;
-	loadInfo.pSrcInfo = nullptr;
-	loadInfo.Usage = D3D10_USAGE_IMMUTABLE;
-	loadInfo.BindFlags =D3D10_BIND_SHADER_RESOURCE;
-	loadInfo.CpuAccessFlags = 0;
-	
-	if(!textureCache->loadFileTexture(overrideFile[0],&texture,&loadInfo))
-		return false;
-
-	
-
-	//Load polyflags
-	DWORD customPolyFlags = 0;
-
-	wcscat_s(overrideFile[0],MAX_PATH,L".flags");
-	FILE* flagFile;
-	if(_wfopen_s(&flagFile,overrideFile[0],L"r") == 0)
-	{
-		fscanf_s(flagFile,"%lx",&customPolyFlags);
-		fclose(flagFile);
-	}
-
-	TextureCache::TextureMetaData metadata = buildMetaData(Info,PolyFlags,customPolyFlags);
-	textureCache->cacheTexture(Info.CacheID,metadata,texture);
-	SAFE_RELEASE(texture);
-	
-	//Load extra textures
-	for(int i=0;i<TextureCache::DUMMY_NUM_EXTERNAL_TEXTURES;i++)
-	{
-		loadInfo.MipLevels = TextureCache::externalTextures[i].mipLevels;
-		if(textureCache->loadFileTexture(overrideFile[1+i],&texture,&loadInfo))
-		{			
-			textureCache->cacheTexture(Info.CacheID,metadata,texture,i);
-			SAFE_RELEASE(texture);
-		}
-	}	
-	
-	return true;*/
-}
-
 TexConverter::TexConverter(TextureCache *textureCache)
 {
 	this->textureCache = textureCache;
@@ -174,7 +85,6 @@ Fill texture info structure and execute proper conversion of pixel data.
 \param Info Unreal texture information, includes cache id, size information, texture data.
 \param PolyFlags Polyflags, see polyflags.h.
 */
-
 void TexConverter::convertAndCache(FTextureInfo& Info,DWORD PolyFlags) const
 {
 
@@ -269,13 +179,6 @@ void TexConverter::convertAndCache(FTextureInfo& Info,DWORD PolyFlags) const
 
 	textureCache->cacheTexture(Info.CacheID,metadata,texture);
 
-	if( desc.Width > 128 && desc.Height > 128 && false )
-	{
-		char buf[256];
-		sprintf(buf,"e:\\wat\\%d.dds",Info.CacheID);
-		D3DX10SaveTextureToFileA(texture,D3DX10_IFF_DDS,buf);
-	}
-
 	//Delete temporary data
 	if(!format.directAssign)
 	{
@@ -345,6 +248,20 @@ void TexConverter::convertMip(const FTextureInfo& Info,const TextureFormat &form
 /**
 Convert from palleted 8bpp to r8g8b8a8.
 */
+// Globals.
+DWORD AlphaPalette[256];
+
+void BuildAlphaPalette(FColor* Pal, DWORD FracA, DWORD MaskA, DWORD FracR, DWORD MaskR, DWORD FracG, DWORD MaskG, DWORD FracB, DWORD MaskB)
+{
+	DWORD* Dest = AlphaPalette;
+	for (FColor* End = Pal + NUM_PAL_COLORS; Pal < End; Pal++)
+		* Dest++
+		= (((Min(MaskA, FracA * Pal->A)) & MaskA)
+			| ((Min(MaskR, FracR * Pal->R)) & MaskR)
+			| ((Min(MaskG, FracG * Pal->G)) & MaskG)
+			| ((Min(MaskB, FracB * Pal->B)) & MaskB)) >> 16;
+}
+
 void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *target,int mipLevel)
 {
 	//If texture is masked with palette index 0 = transparent; make that index black w. alpha 0 (black looks best for the border that gets left after masking)

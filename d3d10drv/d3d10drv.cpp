@@ -246,7 +246,7 @@ UBOOL UD3D10RenderDevice::Init(UViewport *InViewport,INT NewX, INT NewY, INT New
 
 	//Brightness
 	float brightness;
-	//GConfig->GetFloat("WinDrv.WindowsClient","Brightness",brightness);
+	GetConfigFloat("WinDrv.WindowsClient", "Brightness", brightness);
 	D3D::setBrightness(brightness);
 
 	//URenderDevice::PrecacheOnFlip = 1; //Turned on to immediately recache on init (prevents lack of textures after fullscreen switch)
@@ -690,9 +690,6 @@ void UD3D10RenderDevice::DrawTile( FSceneNode* Frame, FTextureInfo& Info, FLOAT 
 	if(!(diffuse=textureCache->setTexture(shader_Tile,TextureCache::PASS_DIFFUSE,Info.CacheID)))
 		return;
 	
-	//if(Info.bRealtimeChanged) //DEUS EX: use this  to catch zyme, toxins etc
-	{}
-
 	DWORD flags = PolyFlags | diffuse->customPolyFlags;
 	shader_Tile->setFlags(flags);
 	DynamicGeometryBuffer *buf = static_cast<DynamicGeometryBuffer*>(shader_Tile->getGeometryBuffer());
@@ -871,12 +868,8 @@ void UD3D10RenderDevice::PrecacheTexture( FTextureInfo& Info, DWORD PolyFlags )
 		}		
 	}
 
-	//Look for an override file for this texture
-	if(!texConverter->loadOverride(Info,PolyFlags))
-	{
-		//Cache texture
-		texConverter->convertAndCache(Info,PolyFlags); //Fills TextureInfo with metadata and a D3D format texture		
-	}
+	//Cache texture
+	texConverter->convertAndCache(Info, PolyFlags); //Fills TextureInfo with metadata and a D3D format texture		
 
 }
 
@@ -900,68 +893,3 @@ void  UD3D10RenderDevice::EndFlash()
 	
 	
 }
-
-#ifdef RUNE
-/**
-Rune world fog is drawn by clearing the screen in the fog color, clipping the world geometry outside the view distance
-and then overlaying alpha blended planes. Unfortunately this function is only called once it's actually time to draw the
-fog, as such it's difficult to move this into a shader.
-
-\param Frame The scene. See SetSceneNode().
-\param ForSurf Fog plane information. Should be drawn with alpha blending enabled, color alpha = position.z/FogDistance.
-\note The pre- and post function for this are meant to set blend state but aren't really needed.
-*/
-void UD3D10RenderDevice::DrawFogSurface(FSceneNode* Frame, FFogSurf &FogSurf)
-{
-	D3D::switchToShader(D3D::SHADER_FOGSURFACE);
-	float mult = 1.0/FogSurf.FogDistance;
-	
-	shader_FogSurface->setFlags(PF_AlphaBlend);
-	
-	DynamicGeometryBuffer *buf = static_cast<DynamicGeometryBuffer*>(shader_FogSurface->getGeometryBuffer());
-	
-	for(FSavedPoly* Poly = FogSurf.Polys; Poly; Poly = Poly->Next)
-	{
-		buf->indexTriangleFan(Poly->NumPts); //Reserve space and generate indices for fan
-		for(int i=0; i<Poly->NumPts; i++ )
-		{
-			Vertex_FogSurface *v = (Vertex_FogSurface*) buf->getVertex();
-			v->Color=*((Vec4*)&FogSurf.FogColor.X);			
-			v->Pos = *(Vec3*)&Poly->Pts[i]->Point.X;
-			v->Color.w = v->Pos.z*mult;		
-			v->flags = PF_AlphaBlend;
-		}
-	}
-}
-
-/**
-Rune object fog is normally drawn using the API's linear fog methods. In the D3D10 case, in the shader.
-This function tells us how to configure the fog.
-
-\param Frame The scene. See SetSceneNode().
-\param FogDistance The end distance of the fog (start distance is always 0)
-\param FogColor The fog's color.
-*/
-void UD3D10RenderDevice::PreDrawGouraud(FSceneNode *Frame, FLOAT FogDistance, FPlane FogColor)
-{
-	D3D::render();
-	if(FogDistance>0)
-	{
-		Vec4 *color = ((Vec4*)&FogColor.X);
-		shader_GouraudPolygon->fog(FogDistance,color);
-	}
-}
-
-/**
-Turn fogging off.
-\param FogDistance Distance with which fog was previously turned on.
-*/
-void UD3D10RenderDevice::PostDrawGouraud(FLOAT FogDistance)
-{
-	D3D::render();
-	if(FogDistance>0)
-	{
-		shader_GouraudPolygon->fog(0,nullptr);
-	}
-}
-#endif
