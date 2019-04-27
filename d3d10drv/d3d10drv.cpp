@@ -435,7 +435,10 @@ void UD3D10RenderDevice::DrawComplexSurface(FSceneNode* Frame, FSurfaceInfo& Sur
 
 	//Cache and set textures
 	const TextureCache::TextureMetaData *diffuse=nullptr, *lightMap=nullptr, *detail=nullptr, *fogMap=nullptr, *macro=nullptr;
+
+
 	PrecacheTexture(*Surface.Texture,Surface.PolyFlags);	
+
 	if(!(diffuse = textureCache->setTexture(shader_ComplexSurface,TextureCache::PASS_DIFFUSE,Surface.Texture->CacheID)))
 		return;
 
@@ -851,7 +854,6 @@ Store a texture in the renderer-kept texture cache. Only called by the game if U
 */
 void UD3D10RenderDevice::PrecacheTexture( FTextureInfo& Info, DWORD PolyFlags )
 {
-	
 	if(textureCache->textureIsCached(Info.CacheID))
 	{
 		if((Info.TextureFlags & TF_RealtimeChanged ) == TF_RealtimeChanged) //Update already cached realtime textures

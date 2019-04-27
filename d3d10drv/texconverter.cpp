@@ -43,7 +43,8 @@ Finally, each override texture can have custom polyflags in a file, these are lo
 #include "TexConverter.h"
 #include "polyflags.h"
 #include <fstream>
-
+#define PYR(n) ((n)*((n+1))/2)		/* Pyramid scaling function */
+BYTE ScaleByteNormal[PYR(256)];	/* Regular normalization table */
 
 /**
 Mappings from Unreal to our texture info
@@ -82,7 +83,6 @@ Load a texture from file instead of the one passed by the game.
 */
 bool TexConverter::loadOverride(const FTextureInfo& Info,DWORD PolyFlags) const
 {
-	auto pallet = Info.Format;
 	return false;
 	/*const char* texName = Info.Texture->GetFullName();
 	
@@ -359,8 +359,10 @@ void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *
 
 	while(source<sourceEnd)
 	{
-		*dest=*(DWORD*)&(Info.Palette[*source]);
+		auto palletedPixel = Info.Palette[*source];
 
+		//palletedPixel.A = 255;
+		*dest=*(DWORD*)&(palletedPixel);
 
 		source++;
 		dest++;
