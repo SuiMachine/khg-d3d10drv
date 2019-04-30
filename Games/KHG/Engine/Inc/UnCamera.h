@@ -209,7 +209,7 @@ class ENGINE_API UViewport : public UPlayer
 	// Normal variables.
 	UObject*		MiscRes;		// Used in in modes like EM_TEXVIEW.
 	FName			Group;			// Group for editing.
-	float			LastUpdateTime;	// Time of last update.
+	DOUBLE			LastUpdateTime;	// Time of last update.
 	INT				SizeX, SizeY;   // Buffer X & Y resolutions.
 	INT				ColorBytes;		// 1=256-color, 4=32-bit color.
 	INT				FrameCount;		// Frame count, incremented when locked.

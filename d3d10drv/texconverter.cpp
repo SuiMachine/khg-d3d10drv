@@ -249,19 +249,6 @@ void TexConverter::convertMip(const FTextureInfo& Info,const TextureFormat &form
 Convert from palleted 8bpp to r8g8b8a8.
 */
 // Globals.
-DWORD AlphaPalette[256];
-
-void BuildAlphaPalette(FColor* Pal, DWORD FracA, DWORD MaskA, DWORD FracR, DWORD MaskR, DWORD FracG, DWORD MaskG, DWORD FracB, DWORD MaskB)
-{
-	DWORD* Dest = AlphaPalette;
-	for (FColor* End = Pal + NUM_PAL_COLORS; Pal < End; Pal++)
-		* Dest++
-		= (((Min(MaskA, FracA * Pal->A)) & MaskA)
-			| ((Min(MaskR, FracR * Pal->R)) & MaskR)
-			| ((Min(MaskG, FracG * Pal->G)) & MaskG)
-			| ((Min(MaskB, FracB * Pal->B)) & MaskB)) >> 16;
-}
-
 void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *target,int mipLevel)
 {
 	//If texture is masked with palette index 0 = transparent; make that index black w. alpha 0 (black looks best for the border that gets left after masking)
@@ -277,9 +264,13 @@ void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *
 	while(source<sourceEnd)
 	{
 		auto palletedPixel = Info.Palette[*source];
+		auto maxColor = Info.MaxColor[*source];
+		palletedPixel.A = palletedPixel.A != 0 || palletedPixel.R > 0 || palletedPixel.G > 0 || palletedPixel.B > 0 || (maxColor.R == 0 && maxColor.G == 0 && maxColor.B == 0 && maxColor.A == 0) ? 128 : 0;
 
 		//palletedPixel.A = 255;
 		*dest=*(DWORD*)&(palletedPixel);
+		//auto cast = reinterpret_cast<byte*>(dest);
+		//cast[3] = 20;
 
 		source++;
 		dest++;

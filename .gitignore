@@ -1,3 +1,4 @@
 # VisualStudio junk
 .vs/
 d3d10drv/KHG Debug/*
+d3d10drv/KHG Release/*

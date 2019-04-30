@@ -59,7 +59,7 @@ void UD3D10RenderDevice::debugs(char* s)
 { 
 	char buf[255];
 	size_t n;
-	//mbstowcs_s(&n,buf,255,s,254);
+	//mbstowcs_s(&n,buf,255,s,254);	
 	//GLog->Log(buf);
 	#ifdef _DEBUG //In debug mode, print output to console
 	puts(s);
@@ -367,14 +367,14 @@ void UD3D10RenderDevice::Lock(FPlane FlashScale, FPlane FlashFog, FPlane ScreenC
 	
 
 	//If needed, set new field of view; the game resets this on level switches etc. Can't be done in config as Unreal doesn't support this.
-	/*
-	if(options.autoFOV && Viewport->Actor->DefaultFOV!=customFOV)
+	if(options.autoFOV && Viewport->Actor->DesiredFOV!=customFOV)
 	{		
 		TCHAR buf[8]="fov ";
-		_itow_s(customFOV,&buf[4],4,10);
-		Viewport->Actor->DefaultFOV=customFOV; //Do this so the value is set even if FOV settings don't take effect (multiplayer mode) 
-		URenderDevice::Viewport->Exec(buf,*GLog); //And this so the FOV change actually happens				
-	}*/
+		_itoa_s(customFOV,&buf[4],4,10);
+		Viewport->Actor->DesiredFOV =customFOV; //Do this so the value is set even if FOV settings don't take effect (multiplayer mode) 
+		//URenderDevice::Viewport->Exec(buf,*GLog); //And this so the FOV change actually happens				
+		URenderDevice::Viewport->Exec(buf);
+	}
 
 	D3D::newFrame(deltaTime);
 
@@ -676,12 +676,6 @@ Used for 2D UI elements, smoke.
 */
 void UD3D10RenderDevice::DrawTile( FSceneNode* Frame, FTextureInfo& Info, FLOAT X, FLOAT Y, FLOAT XL, FLOAT YL, FLOAT U, FLOAT V, FLOAT UL, FLOAT VL, class FSpanBuffer* Span, FLOAT Z, FPlane Color, FPlane Fog, DWORD PolyFlags )
 {
-#ifdef DEUSEX	
-	if(Z==1 && !drawingHUD && wcswcs(Info.Texture->GetName(),"Corona")==0) //Deus Ex doesn't call endFlash() before (all) UI elements.
-	{
-		EndFlash();
-	}
-#endif
 	D3D::switchToShader(D3D::SHADER_TILE);
 	SetSceneNode(Frame); //Set scene node fix.
 
@@ -792,14 +786,7 @@ Various command from the game. Can be used to intercept input. First let the par
 UBOOL UD3D10RenderDevice::Exec(const TCHAR* Cmd, FOutputDevice& Ar)
 {
 	//First try parent
-	//wchar_t* ptr;
-	#if (!UNREALGOLD && !NERF && FALSE)
-	if(URenderDevice::Exec(Cmd,Ar))
-	{
-		return 1;
-	}
-	else
-	#endif
+	char* ptr;
 	if(ParseCommand(&Cmd,"GetRes"))
 	{
 		UD3D10RenderDevice::debugs("Getting modelist...");
@@ -809,16 +796,16 @@ UBOOL UD3D10RenderDevice::Exec(const TCHAR* Cmd, FOutputDevice& Ar)
 		UD3D10RenderDevice::debugs("Done.");
 		return 1;
 	}	
-	/*else if((ptr=(wchar_t*)wcswcs(Cmd,L"Brightness"))) //Brightness is sent as "brightness [val]".
+	else if((ptr=(char*)strstr(Cmd,"Brightness"))) //Brightness is sent as "brightness [val]".
 	{
 		UD3D10RenderDevice::debugs("Setting brightness.");
-		if((ptr=wcschr(ptr,' ')))//Search for space after 'brightness'
+		if((ptr=strchr(ptr,' ')))//Search for space after 'brightness'
 		{
 			float b;
-			b=_wtof(ptr); //Get brightness value;
+			b=atof(ptr); //Get brightness value;
 			D3D::setBrightness(b);
 		}
-	}*/
+	}
 	return 0;
 }
 
@@ -890,6 +877,4 @@ void  UD3D10RenderDevice::EndFlash()
 		shader_ComplexSurface->clearDepth();
 		drawingHUD=true;
 	}
-	
-	
 }

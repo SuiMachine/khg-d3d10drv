@@ -196,7 +196,7 @@ enum ETextureFormat
 {
 	// Base types.
 	TEXF_P8			= 0x00,
-	//TEXF_RGB32		= 0x01,
+	TEXF_RGB32		= 0x01,
 	TEXF_RGBA7		= 0x01,
 	TEXF_RGB16		= 0x02,
 	TEXF_DXT1       = 0x03,
