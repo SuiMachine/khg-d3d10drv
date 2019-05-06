@@ -267,7 +267,7 @@ Resize buffers and viewport.
 UBOOL UD3D10RenderDevice::SetRes(INT NewX, INT NewY, INT NewColorBytes, UBOOL Fullscreen)
 {
 	//Without BLIT_Direct3D major flickering occurs when switching from fullscreen to windowed.
-	UBOOL Result = URenderDevice::Viewport->ResizeViewport(Fullscreen ? (BLIT_Fullscreen|BLIT_Direct3D) : (BLIT_HardwarePaint|BLIT_Direct3D), NewX, NewY, NewColorBytes);
+	UBOOL Result = URenderDevice::Viewport->ResizeViewport(BLIT_HardwarePaint|BLIT_Direct3D, NewX, NewY, NewColorBytes);
 	if (!Result) 
 	{
 		//GError->Log("SetRes: Error resizing viewport.");
