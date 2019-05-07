@@ -790,7 +790,7 @@ UBOOL UD3D10RenderDevice::Exec(const TCHAR* Cmd, FOutputDevice& Ar)
 	if(ParseCommand(&Cmd,"GetRes"))
 	{
 		UD3D10RenderDevice::debugs("Getting modelist...");
-		TCHAR* resolutions=D3D::getModes();
+		TCHAR * resolutions=D3D::getModes();
 		Ar.Log(resolutions);
 		delete [] resolutions;
 		UD3D10RenderDevice::debugs("Done.");

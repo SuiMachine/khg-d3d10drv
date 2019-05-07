@@ -6,4 +6,4 @@ A port of Kentie's Unreal D3D10 renderer for Klingon Honor Guard.
 # To do:
 * Fix viewport resize.
 * Fix texture pallet conversion
-* Fix Toggle Fullscreen / Toggle Resolution in-game (crashes it).
+* Fix Toggle Fullscreen
