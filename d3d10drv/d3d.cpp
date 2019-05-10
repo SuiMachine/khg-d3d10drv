@@ -7,7 +7,7 @@ Quite a lot of code, but splitting this up does not really seem worth it.
 
 An effort is made to reduce the amount of needed draw() calls. As such, state is only changed when absolutely necessary.
 */
-#ifdef _DEBUG
+#ifdef _KHGDEBUG
 #define _DEBUGDX //debug device
 #endif
 
@@ -298,7 +298,7 @@ Set resolution and windowed/fullscreen.
 int D3D::resize(int X, int Y, bool fullScreen)
 {		
 	
-	#ifdef _DEBUG
+	#ifdef _KHGDEBUG
 	printf("%d %d %d\n",X,Y,fullScreen);
 	#endif
 	HRESULT hr;

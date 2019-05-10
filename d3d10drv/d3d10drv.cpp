@@ -28,6 +28,7 @@ Called UD3D10RenderDevice as Unreal leaves out first letter when accessing the c
 #include "shader_tile.h"
 #include "shader_complexsurface.h"
 #include "shader_fogsurface.h"
+#include <iostream>
 
 //UObject glue
 IMPLEMENT_PACKAGE(D3D10Drv);
@@ -133,9 +134,35 @@ void UD3D10RenderDevice::StaticConstructor(UClass* Class)
 	getOption("DetailTextures", 1, true);
 
 	//Create a console to print debug stuff to.
-#ifdef _DEBUG
+#ifdef _KHGDEBUG
 	AllocConsole();
-	stdout->_file = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+
+	// Get STDOUT handle
+	HANDLE ConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+	int SystemOutput = _open_osfhandle(intptr_t(ConsoleOutput), _O_TEXT);
+	FILE* COutputHandle = _fdopen(SystemOutput, "w");
+
+	// Get STDERR handle
+	HANDLE ConsoleError = GetStdHandle(STD_ERROR_HANDLE);
+	int SystemError = _open_osfhandle(intptr_t(ConsoleError), _O_TEXT);
+	FILE* CErrorHandle = _fdopen(SystemError, "w");
+
+	// Get STDIN handle
+	HANDLE ConsoleInput = GetStdHandle(STD_INPUT_HANDLE);
+	int SystemInput = _open_osfhandle(intptr_t(ConsoleInput), _O_TEXT);
+	FILE* CInputHandle = _fdopen(SystemInput, "r");
+
+	// Redirect the CRT standard input, output, and error handles to the console
+	freopen_s(&CInputHandle, "CONIN$", "r", stdin);
+	freopen_s(&COutputHandle, "CONOUT$", "w", stdout);
+	freopen_s(&CErrorHandle, "CONOUT$", "w", stderr);
+
+	std::wcout.clear();
+	std::cout.clear();
+	std::wcerr.clear();
+	std::cerr.clear();
+	std::wcin.clear();
+	std::cin.clear();
 #endif
 }
 
@@ -297,7 +324,7 @@ void UD3D10RenderDevice::Exit()
 	delete textureCache;
 	delete texConverter;
 	D3D::uninit();
-	//FreeConsole();
+	FreeConsole();
 }
 
 /**
@@ -309,13 +336,7 @@ Empty texture cache.
 
 void UD3D10RenderDevice::Flush()
 {
-	textureCache->flush();
-	D3D::setBrightness(Viewport->GetOuterUClient()->Brightness);
-	//If caching is allowed, tell the game to make caching calls (PrecacheTexture() function)
-	#if (!UNREALGOLD && false)
-	if(AllowPrecache && options.precache)
-		URenderDevice::PrecacheOnFlip = 1;
-	#endif
+	Flush(0);
 }
 
 void UD3D10RenderDevice::Flush(UBOOL AllowPrecache)
@@ -379,9 +400,6 @@ void UD3D10RenderDevice::Lock(FPlane FlashScale, FPlane FlashFog, FPlane ScreenC
 	D3D::newFrame(deltaTime);
 
 	//Set up flash if needed
-#ifdef RUNE_100 //Fix for Rune v1.1 green screen
-	FlashFog.Y = 0.0f;
-#endif
 	Vec4 flashFog = Vec4(FlashFog.X,FlashFog.Y,FlashFog.Z,0.0f);
 	D3D::flash(flashFog);		
 
@@ -435,7 +453,6 @@ void UD3D10RenderDevice::DrawComplexSurface(FSceneNode* Frame, FSurfaceInfo& Sur
 
 	//Cache and set textures
 	const TextureCache::TextureMetaData *diffuse=nullptr, *lightMap=nullptr, *detail=nullptr, *fogMap=nullptr, *macro=nullptr;
-
 
 	PrecacheTexture(*Surface.Texture,Surface.PolyFlags);	
 
@@ -701,18 +718,7 @@ void UD3D10RenderDevice::DrawTile( FSceneNode* Frame, FTextureInfo& Info, FLOAT 
 	v->z = Z;
 	v->Color = *((Vec4*)&Color.X);
 	
-	#ifdef RUNE
-	if(PolyFlags & PF_AlphaBlend)
-	{
-		v->Color.w = (Info.Texture->Alpha);
-	}
-	else	
-	{
-	#endif
-		v->Color.w = 1.0f;
-	#ifdef RUNE
-	}
-	#endif
+	v->Color.w = 1.0f;
 
 	v->flags = flags;
 }
