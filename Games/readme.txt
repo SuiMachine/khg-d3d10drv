@@ -1,1 +1,3 @@
-Core/Engine headers and libs downloaded from [http://coding.hanfling.de/launch/](http://coding.hanfling.de/launch/). 1 file mostly modified to allow compilation and one struct definition corrected.
+Core/Engine headers and libs downloaded from http://coding.hanfling.de/launch/.
+
+Modified headers have comment "D3D10DRV MODIFIED"
