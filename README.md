@@ -17,4 +17,4 @@ A port of Kentie's Unreal D3D10 renderer for Klingon Honor Guard.
 3. Edit ``KHG.ini`` with a text editor.
 4. In ``[Engine.Engine]`` section set the ``GameRenderDevice`` to ``D3D10Drv.D3D10RenderDevice``.
 5. Save the changes and launch the game.
-6. If the game crashes during FMV cinematics, in ``WinDrv.WindowsClient`` section of ``KHG.ini`` set ``UseDirectDraw to ``False``.
+6. If the game crashes during FMV cinematics, in ``WinDrv.WindowsClient`` section of ``KHG.ini`` set ``UseDirectDraw`` to ``False``.
