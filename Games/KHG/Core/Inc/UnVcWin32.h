@@ -54,7 +54,7 @@ enum {CACHE_LINE_SIZE   = 32}; // Cache line size.
 #define GET_VARARGS(msg,fmt) appGetVarArgs(msg,fmt)
 
 // Compiler name.
-#ifdef _DEBUG
+#ifdef _KHGDEBUG
 	#define COMPILER "Compiled with Visual C++ Debug"
 #else
 	#define COMPILER "Compiled with Visual C++"

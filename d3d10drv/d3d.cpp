@@ -112,7 +112,7 @@ int D3D::init(HWND _hWnd,D3D::Options &createOptions)
 
 	//Create device we're actually going to use
 	hr = D3D10CreateDeviceAndSwapChain(nullptr, D3D10_DRIVER_TYPE_HARDWARE, NULL, flags, D3D10_SDK_VERSION, &sd,&D3DObjects.swapChain, &D3DObjects.device);
-//	hr = D3DObjects.factory->CreateSwapChain(D3DObjects.device,&sd,&D3DObjects.swapChain);
+
 	if(FAILED(hr))
 	{
 		UD3D10RenderDevice::debugs("Error creating swap chain");

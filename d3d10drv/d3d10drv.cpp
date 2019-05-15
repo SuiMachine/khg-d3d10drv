@@ -242,27 +242,27 @@ UBOOL UD3D10RenderDevice::Init(UViewport *InViewport,INT NewX, INT NewY, INT New
 	
 	if(!D3D::init((HWND) InViewport->GetWindow(),D3DOptions))
 	{
-		//GError->Log("Init: Initializing Direct3D failed.");
+		GError.Log("Init: Initializing Direct3D failed.");
 		return 0;
 	}
 	
 	if(!UD3D10RenderDevice::SetRes(NewX,NewY,NewColorBytes,Fullscreen))
 	{
-		//GError->Log("Init: SetRes failed.");
+		GError.Log("Init: SetRes failed.");
 		return 0;
 	}
 
 	textureCache= new (std::nothrow) TextureCache(D3D::getDevice());
 	if(!textureCache)
 	{
-		//GError->Log("Error allocating texture cache.");
+		GError.Log("Error allocating texture cache.");
 		return 0;
 	}
 
 	texConverter = new (std::nothrow) TexConverter(textureCache);
 	if(!texConverter)
 	{
-		//GError->Log("Error allocating texture converter.");
+		GError.Log("Error allocating texture converter.");
 		return 0;
 	}
 
@@ -295,14 +295,18 @@ UBOOL UD3D10RenderDevice::SetRes(INT NewX, INT NewY, INT NewColorBytes, UBOOL Fu
 {
 	//Without BLIT_Direct3D major flickering occurs when switching from fullscreen to windowed.
 	UBOOL Result = URenderDevice::Viewport->ResizeViewport(BLIT_HardwarePaint|BLIT_Direct3D, NewX, NewY, NewColorBytes);
+	auto device = D3D::getDevice();
+	
+
+
 	if (!Result) 
 	{
-		//GError->Log("SetRes: Error resizing viewport.");
+		GError.Log("SetRes: Error resizing viewport.");
 		return 0;
 	}	
 	if(!D3D::resize(NewX,NewY,(Fullscreen!=0)))
 	{
-		//GError->Log("SetRes: D3D::Resize failed.");
+		GError.Log("SetRes: D3D::Resize failed.");
 		return 0;
 	}
 	
@@ -654,18 +658,8 @@ void UD3D10RenderDevice::DrawGouraudPolygon( FSceneNode* Frame, FTextureInfo& In
 		v->Color = *(Vec4*)&Pts[i]->Light.X;
 		v->Fog = *(Vec4*)&Pts[i]->Fog.X;
 		v->flags = flags;
-		#ifdef RUNE
-		if(PolyFlags & PF_AlphaBlend)
-		{
-			v->Color.w = (Info.Texture->Alpha);
-		}
-		else	
-		{
-		#endif
-			v->Color.w = 1.0f;
-		#ifdef RUNE
-		}
-		#endif		
+		v->Color.w = 1.0f;
+
 	}
 
 }

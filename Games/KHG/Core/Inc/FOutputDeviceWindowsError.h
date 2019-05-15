@@ -14,7 +14,7 @@ class FOutputDeviceWindowsError : public FErrorOut
 public:
 	void Serialize( const TCHAR* Msg, enum EName Event )
 	{
-#ifdef _DEBUG
+#ifdef _KHGDEBUG
 		// Just display info and break the debugger.
   		debugf( NAME_Critical, TEXT("appError called while debugging:") );
 		debugf( NAME_Critical, Msg );

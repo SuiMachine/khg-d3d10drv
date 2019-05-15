@@ -3,7 +3,7 @@
 	Copyright 1997-1999 Epic Games, Inc. All Rights Reserved.
 =============================================================================*/
 
-#if defined(_DEBUG) && !defined(_REALLY_WANT_DEBUG)
+#if defined(_KHGDEBUG) && !defined(_REALLY_WANT_DEBUG)
 #error "Your active configuration is set to DEBUG mode -- this may result in an unstable build!"
 #endif
 

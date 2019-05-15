@@ -138,7 +138,7 @@ CORE_API void appDumpAllocs();
 // For showing calling stack when errors occur in major functions.
 // Meant to be enabled in release builds.
 //
-#if defined(_DEBUG) || !DO_GUARD
+#if defined(_KHGDEBUG) || !DO_GUARD
 	#define guard(func)			{static const TCHAR __FUNC_NAME__[]=TEXT(#func);
 	#define unguard				}
 	#define unguardf(msg)		}
@@ -153,7 +153,7 @@ CORE_API void appDumpAllocs();
 // For showing calling stack when errors occur in performance-critical functions.
 // Meant to be disabled in release builds.
 //
-#if defined(_DEBUG) || !DO_GUARD || !DO_GUARD_SLOW
+#if defined(_KHGDEBUG) || !DO_GUARD || !DO_GUARD_SLOW
 	#define guardSlow(func)		{
 	#define unguardfSlow(msg)	}
 	#define unguardSlow			}
