@@ -87,8 +87,6 @@ Fill texture info structure and execute proper conversion of pixel data.
 */
 void TexConverter::convertAndCache(FTextureInfo& Info,DWORD PolyFlags) const
 {
-
-	
 	if(Info.Format > TEXF_RGBA8)
 	{
 		UD3D10RenderDevice::debugs("Unknown texture type.");
@@ -264,16 +262,11 @@ void TexConverter::fromPaletted(const FTextureInfo& Info,DWORD PolyFlags, void *
 	while(source<sourceEnd)
 	{
 		auto palletedPixel = Info.Palette[*source];
-		auto maxColor = Info.MaxColor[*source];
-		//As a fun fact:
-		//if you set the Alpha to 128 on Nvidia GPU, you'll get 100% opacity, while 127 will be fully transparent
-		//On AMD with 128 you get more of less half transparent, but 127 still gets you fully transparent. Lovely!
-		palletedPixel.A = palletedPixel.A != 0 || palletedPixel.R > 0 || palletedPixel.G > 0 || palletedPixel.B > 0 || (maxColor.R == 0 && maxColor.G == 0 && maxColor.B == 0 && maxColor.A == 0) ? 255 : 0;
 
-		//palletedPixel.A = 255;
+		//Crappy hack for alpha... someone should fix it, but idk who.
+		palletedPixel.A = palletedPixel.A != 0 || palletedPixel.R > 0 || palletedPixel.G > 0 || palletedPixel.B > 0 || *source != 0 ? 255 : 0;
+
 		*dest=*(DWORD*)&(palletedPixel);
-		//auto cast = reinterpret_cast<byte*>(dest);
-		//cast[3] = 20;
 
 		source++;
 		dest++;

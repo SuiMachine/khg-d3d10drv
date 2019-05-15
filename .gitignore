@@ -2,3 +2,4 @@
 .vs/
 d3d10drv/KHG Debug/*
 d3d10drv/KHG Release/*
+Release/d3d10drv.zip

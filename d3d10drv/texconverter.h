@@ -38,5 +38,4 @@ public:
 	TexConverter(TextureCache *textureCache);
 	void convertAndCache(FTextureInfo& Info, DWORD PolyFlags) const;
 	void update(FTextureInfo& Info,DWORD PolyFlags) const;
-
 };
