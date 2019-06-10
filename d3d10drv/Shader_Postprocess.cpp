@@ -90,7 +90,7 @@ bool Shader_Postprocess::compile(const D3D10_SHADER_MACRO *macros, DWORD shaderF
 	return true;
 }
 
-bool Shader_Postprocess::compilePostProcessingShader(const char* filename, const D3D10_SHADER_MACRO *macros, DWORD shaderFlags)
+bool Shader_Postprocess::compilePostProcessingShader(const TCHAR* filename, const D3D10_SHADER_MACRO *macros, DWORD shaderFlags)
 {
 	hr = D3DX10CreateEffectFromFile(filename,macros,nullptr,"fx_4_0",shaderFlags, D3D10_EFFECT_COMPILE_CHILD_EFFECT,device,pool,nullptr,&effect,&blob,nullptr);
 	if(!checkCompileResult(hr))

@@ -277,11 +277,11 @@ void D3D::uninit()
 	}
 
 	SAFE_RELEASE(D3DObjects.backBufferRTV);
-	
 	SAFE_RELEASE(D3DObjects.swapChain);
 	SAFE_RELEASE(D3DObjects.device);
 	SAFE_RELEASE(D3DObjects.output);
 	SAFE_RELEASE(D3DObjects.factory);
+	CoUninitialize();
 	UD3D10RenderDevice::debugs("Bye.");
 }
 

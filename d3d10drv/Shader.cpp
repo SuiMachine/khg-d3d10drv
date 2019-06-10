@@ -63,7 +63,7 @@ Check shader compile result and show errors if applicable.
 bool Shader::checkCompileResult(HRESULT hr)
 {
 	if(blob) //Show compile errors if present
-			UD3D10RenderDevice::debugs((char*) blob->GetBufferPointer());		
+			UD3D10RenderDevice::debugs((TCHAR*) blob->GetBufferPointer());
 	if(FAILED(hr))
 	{
 		UD3D10RenderDevice::debugs("Error compiling effects file. Please make sure it resides in the \"\\system\\d3d10drv\" directory.");		

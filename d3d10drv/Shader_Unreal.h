@@ -33,7 +33,7 @@ public:
 	//From Shader
 	bool compile(const D3D10_SHADER_MACRO *macros, DWORD shaderFlags) override;
 
-	bool compileUnrealShader(const char* filename,const D3D10_SHADER_MACRO *macros, DWORD shaderFlags,const D3D10_INPUT_ELEMENT_DESC *elementDesc, int numElements);
+	bool compileUnrealShader(const TCHAR* filename,const D3D10_SHADER_MACRO *macros, DWORD shaderFlags,const D3D10_INPUT_ELEMENT_DESC *elementDesc, int numElements);
 	bool createRenderTargetViews(ID3D10RenderTargetView *backbuffer, const DXGI_SWAP_CHAIN_DESC &swapChainDesc,int multiSampleCount);
 	void releaseRenderTargetViews();
 	void Shader_Unreal::setProjection(float aspect, float XoverZ, float zNear, float zFar) const;

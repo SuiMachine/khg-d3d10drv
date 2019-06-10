@@ -33,7 +33,7 @@ public:
 	//From Shader
 	bool compile(const D3D10_SHADER_MACRO *macros, DWORD shaderFlags) override;
 
-	bool compilePostProcessingShader(const char* filename, const D3D10_SHADER_MACRO *macros, DWORD shaderFlags);
+	bool compilePostProcessingShader(const TCHAR* filename, const D3D10_SHADER_MACRO *macros, DWORD shaderFlags);
 	virtual void setInputTexture(ID3D10ShaderResourceView *texture);	
 	void setElapsedTime(float t);
 	void setInputTextureOffset(int left, int top) const;

@@ -34,8 +34,8 @@ private:
 public:
 	/**@name Helpers */
 	//@{	
-	static void debugs(char *s);
-	static int getOption(char* name, int defaultVal, bool isBool);
+	static void debugs(TCHAR*s);
+	static int getOption(TCHAR* name, int defaultVal, bool isBool);
 	static int getOption(UClass* Class, TCHAR* name,int defaultVal, bool isBool);
 	//@}
 	
@@ -43,6 +43,8 @@ public:
 	//@{	
 	UBOOL Init(UViewport *InViewport,INT NewX, INT NewY, INT NewColorBytes, UBOOL Fullscreen);
 	UBOOL SetRes(INT NewX, INT NewY, INT NewColorBytes, UBOOL Fullscreen);
+	//UBOOL UnSetRes(const TCHAR* Msg, HRESULT h);
+	void ShutdownAfterError();
 	void Exit();
 
 	void Flush();

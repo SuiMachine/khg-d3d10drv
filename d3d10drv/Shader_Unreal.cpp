@@ -65,7 +65,7 @@ bool Shader_Unreal::compile(const D3D10_SHADER_MACRO *macros, DWORD shaderFlags)
 	return true;
 }
 
-bool Shader_Unreal::compileUnrealShader(const char* filename,const D3D10_SHADER_MACRO *macros, DWORD shaderFlags,const D3D10_INPUT_ELEMENT_DESC *elementDesc, int numElements)
+bool Shader_Unreal::compileUnrealShader(const TCHAR* filename,const D3D10_SHADER_MACRO *macros, DWORD shaderFlags,const D3D10_INPUT_ELEMENT_DESC *elementDesc, int numElements)
 {
 	hr = D3DX10CreateEffectFromFile(filename,macros,nullptr,"fx_4_0",shaderFlags, D3D10_EFFECT_COMPILE_CHILD_EFFECT,device,pool,nullptr,&effect,&blob,nullptr);
 	if(!checkCompileResult(hr))

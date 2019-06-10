@@ -56,9 +56,9 @@ Prints text to the game's log and the standard output if in debug mode.
 \param s A the message to print.
 \note Does not take a wide character string because not everything we want to print might be available as such (i.e. ID3D10Blobs).
 */
-void UD3D10RenderDevice::debugs(char* s)
+void UD3D10RenderDevice::debugs(TCHAR* s)
 { 
-	char buf[255];
+	TCHAR buf[255];
 	size_t n;
 	//mbstowcs_s(&n,buf,255,s,254);	
 	//GLog->Log(buf);
@@ -80,9 +80,9 @@ Attempts to read a property from the game's config file; on failure, a default i
 \return The value for the property.
 \note The default value is written so it can be user modified (either from the config or preferences window) from then on.
 */
-int UD3D10RenderDevice::getOption(char* name,int defaultVal, bool isBool)
+int UD3D10RenderDevice::getOption(TCHAR* name,int defaultVal, bool isBool)
 {
-	char* Section = "D3D10Drv.D3D10RenderDevice";
+	TCHAR* Section = "D3D10Drv.D3D10RenderDevice";
 	int out;
 	if(isBool)
 	{
@@ -318,6 +318,12 @@ UBOOL UD3D10RenderDevice::SetRes(INT NewX, INT NewY, INT NewColorBytes, UBOOL Fu
 	return 1;
 }
 
+void UD3D10RenderDevice::ShutdownAfterError()
+{
+	debugf(NAME_Exit, TEXT("UD3D10RenderDevice::ShutdownAfterError"));
+	D3D::uninit();
+}
+
 /**
 Cleanup.
 */
@@ -328,6 +334,7 @@ void UD3D10RenderDevice::Exit()
 	delete textureCache;
 	delete texConverter;
 	D3D::uninit();
+	textureCache = NULL;
 	FreeConsole();
 }
 
@@ -786,7 +793,7 @@ Various command from the game. Can be used to intercept input. First let the par
 UBOOL UD3D10RenderDevice::Exec(const TCHAR* Cmd, FOutputDevice& Ar)
 {
 	//First try parent
-	char* ptr;
+	TCHAR* ptr;
 	if(ParseCommand(&Cmd,"GetRes"))
 	{
 		UD3D10RenderDevice::debugs("Getting modelist...");
@@ -796,7 +803,7 @@ UBOOL UD3D10RenderDevice::Exec(const TCHAR* Cmd, FOutputDevice& Ar)
 		UD3D10RenderDevice::debugs("Done.");
 		return 1;
 	}	
-	else if((ptr=(char*)strstr(Cmd,"Brightness"))) //Brightness is sent as "brightness [val]".
+	else if((ptr=(TCHAR*)strstr(Cmd,"Brightness"))) //Brightness is sent as "brightness [val]".
 	{
 		UD3D10RenderDevice::debugs("Setting brightness.");
 		if((ptr=strchr(ptr,' ')))//Search for space after 'brightness'

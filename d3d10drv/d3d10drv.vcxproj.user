@@ -81,4 +81,14 @@
     <LocalDebuggerWorkingDirectory>D:\microprose\khg\System\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='KHG Debug (No defines)|Win32'">
+    <LocalDebuggerCommand>khg.exe</LocalDebuggerCommand>
+    <LocalDebuggerWorkingDirectory>D:\microprose\khg\System\</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='KHG Release-Test|Win32'">
+    <LocalDebuggerWorkingDirectory>D:\microprose\khg\System\</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>khg.exe</LocalDebuggerCommand>
+  </PropertyGroup>
 </Project>

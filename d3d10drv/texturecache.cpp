@@ -78,7 +78,7 @@ Load a texture from a .dds file
 
 \return true when succesful
 */
-bool TextureCache::loadFileTexture(char* fileName, ID3D10Texture2D **tex, D3DX10_IMAGE_LOAD_INFO *loadInfo) const
+bool TextureCache::loadFileTexture(TCHAR* fileName, ID3D10Texture2D **tex, D3DX10_IMAGE_LOAD_INFO *loadInfo) const
 {
 	HRESULT hr; 
 

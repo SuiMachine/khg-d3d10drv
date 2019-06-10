@@ -6,6 +6,7 @@ A port of Kentie's Unreal D3D10 renderer for Klingon Honor Guard.
 # To do:
 * Fix viewport resize.
 * Fix Toggle Fullscreen
+* Fix crash on exit / cutscene playback (GetFullName crash).
 
 # Notes:
 * Pallette conversion is not quite as it should be (aka: To make it work, I have implemented a dirty hack, where if element isn't first is array, it's considered visible... not sure how to fix it).

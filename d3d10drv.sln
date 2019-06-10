@@ -7,10 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d3d10drv", "d3d10drv\d3d10d
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		KHG Debug (No defines)|Win32 = KHG Debug (No defines)|Win32
 		KHG Debug|Win32 = KHG Debug|Win32
 		KHG Release|Win32 = KHG Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}.KHG Debug (No defines)|Win32.ActiveCfg = KHG Debug (No defines)|Win32
+		{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}.KHG Debug (No defines)|Win32.Build.0 = KHG Debug (No defines)|Win32
 		{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}.KHG Debug|Win32.ActiveCfg = KHG Debug|Win32
 		{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}.KHG Debug|Win32.Build.0 = KHG Debug|Win32
 		{8EFD8EED-00B7-49BA-A8B1-E74D6255796A}.KHG Release|Win32.ActiveCfg = KHG Release|Win32
