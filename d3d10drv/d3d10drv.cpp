@@ -223,7 +223,7 @@ UBOOL UD3D10RenderDevice::Init(UViewport *InViewport,INT NewX, INT NewY, INT New
 	D3DOptions.bumpMapping = getOption("BumpMapping",0,true);	
 	D3DOptions.classicLighting = getOption("ClassicLighting",1,true);	
 	D3DOptions.alphaToCoverage = getOption("AlphaToCoverage",0,true);
-	options.autoFOV = getOption("AutoFOV",1,true);
+	options.autoFOV = getOption("AutoFOV",0,true);
 	options.FPSLimit = getOption("FPSLimit",100,false);
 	D3DOptions.simulateMultipassTexturing = getOption("simulateMultipassTexturing",1,true);
 	options.unlimitedViewDistance = getOption("unlimitedViewDistance",0,true);
