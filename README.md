@@ -3,6 +3,8 @@ Star Trek: Klingon Honor Guard - D3D10 renderer
 
 A port of Kentie's Unreal D3D10 renderer for Klingon Honor Guard.
 
+'''Note''': I'll be archiving this repository, after '''darknovismc''' sorts out Alpha Transparency issues with his - far superior - [D3D11 renderer](https://www.moddb.com/mods/unreal-directx11-renderer-for-ut-ug-rune-and-dx).
+
 # To do:
 * Fix viewport resize.
 * Fix Toggle Fullscreen
